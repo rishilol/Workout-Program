@@ -32,5 +32,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "com.rishikoduri.workout_program.App"
+    mainClass = "com.rishikoduri.workout_program.Main"
 }

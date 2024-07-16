@@ -1,0 +1,20 @@
+{
+  "name": "webview",
+  "version": "1.0.0",
+  "description": "html/css view via electron",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rishilol/Workout-Program.git"
+  },
+  "author": "Rishi Koduri, Mufaro Machaya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rishilol/Workout-Program/issues"
+  },
+  "homepage": "https://github.com/rishilol/Workout-Program#readme"
+}
