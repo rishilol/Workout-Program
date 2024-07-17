@@ -1,7 +1,5 @@
 package com.rishikoduri.workout_program;
 
-import static Units.*;
-
 public final class User 
 {
     /*
@@ -9,15 +7,22 @@ public final class User
      * whereas all data for weight is stored internally as
      * pounds by default.
      */
-    protected final int height, weight;
+    protected final Measurement height, weight;
 
-    /* Default */
+    /* Default Constructor */
     private User (
-        final MeasureMent)
+        final Measurement height,
+        final Measurement weight)
     {
         this.height = height;
         this.weight = weight;
     }
 
-    public static User parse_from_strings()
+    public static User 
+    parse_from_strings(
+            final String height,
+            final String weight)
+    {
+        
+    }
 }
