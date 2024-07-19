@@ -24,44 +24,23 @@ public class Measurement
 
     public static enum UnitType {
         /* Length */
-        INCHES,
-        FEET,
-        CENTIMETERS,
-        METERS,
+        INCHES(0),
+        FEET(1),
+        CENTIMETERS(2),
+        METERS(3),
 
         /* Weight */
-        POUNDS,
-        GRAMS,
-        KILOGRAMS
+        POUNDS(4),
+        GRAMS(5),
+        KILOGRAMS(6);
+
+        public final int index;
+
+        private UnitType(int index) 
+        {
+            this.index = index;
+        }
     }
-
-    /* Conversion Factors */
-
-    /* Length */
-    private static final short INCHES_PER_FOOT = 12;
-    private static final float FEET_PER_INCH = 1.0f / INCHES_PER_FOOT;
-
-    private static final float CENTIMETERS_PER_INCH = 2.54f;
-    private static final float INCHES_PER_CENTIMETER = 1.0f / CENTIMETERS_PER_INCH;
-
-    private static final short CENTIMETERS_PER_METER = 100;
-    private static final float METERS_PER_CENTIMETER = 1.0f / CENTIMETERS_PER_METER;
-
-    private static final float CENTIMETERS_PER_FOOT = CENTIMETERS_PER_INCH * INCHES_PER_FOOT;
-    private static final float FEET_PER_CENTIMETER = 1.0f / CENTIMETERS_PER_FOOT;
-
-    private static final float METERS_PER_FOOT = CENTIMETERS_PER_FOOT / CENTIMETERS_PER_METER;
-    private static final float FEET_PER_METER = FEET_PER_CENTIMETER * CENTIMETERS_PER_METER;
-
-    /* Weight */
-    private static final float GRAMS_PER_POUND = 453.5924f;
-    private static final float POUNDS_PER_GRAM = 1.0f / GRAMS_PER_POUND;
-
-    private static final short GRAMS_PER_KILOGRAM = 1000;
-    private static final float KILOGRAMS_PER_GRAM = 1.0f / GRAMS_PER_KILOGRAM;
-
-    private static final float POUNDS_PER_KILOGRAM = POUNDS_PER_GRAM * GRAMS_PER_KILOGRAM;
-    private static final float KILOGRAMS_PER_POUND = 1.0f / POUNDS_PER_KILOGRAM;
 
     public static MeasurementType
     get_measurement_type_from_unit_type(
@@ -79,15 +58,83 @@ public class Measurement
             case UnitType.KILOGRAMS:
                 return MeasurementType.WEIGHT;
         }
+
+        return null;
+    }
+
+    /* Conversion Factors */
+
+    /* Length */
+    private static final short INCHES_PER_FOOT = 12;
+    private static final float FEET_PER_INCH = 
+        1.0f / INCHES_PER_FOOT;
+
+    private static final float CENTIMETERS_PER_INCH = 2.54f;
+    private static final float INCHES_PER_CENTIMETER = 
+        1.0f / CENTIMETERS_PER_INCH;
+
+    private static final short CENTIMETERS_PER_METER = 100;
+    private static final float METERS_PER_CENTIMETER = 
+        1.0f / CENTIMETERS_PER_METER;
+
+    private static final float CENTIMETERS_PER_FOOT = 
+        CENTIMETERS_PER_INCH * INCHES_PER_FOOT;
+    private static final float FEET_PER_CENTIMETER = 
+        1.0f / CENTIMETERS_PER_FOOT;
+
+    private static final float METERS_PER_FOOT = 
+        CENTIMETERS_PER_FOOT / CENTIMETERS_PER_METER;
+    private static final float FEET_PER_METER = 
+        FEET_PER_CENTIMETER * CENTIMETERS_PER_METER;
+
+    /* Weight */
+    private static final float GRAMS_PER_POUND = 453.5924f;
+    private static final float POUNDS_PER_GRAM = 
+        1.0f / GRAMS_PER_POUND;
+
+    private static final short GRAMS_PER_KILOGRAM = 1000;
+    private static final float KILOGRAMS_PER_GRAM = 
+        1.0f / GRAMS_PER_KILOGRAM;
+
+    private static final float POUNDS_PER_KILOGRAM = 
+        POUNDS_PER_GRAM * GRAMS_PER_KILOGRAM;
+    private static final float KILOGRAMS_PER_POUND = 
+        1.0f / POUNDS_PER_KILOGRAM;
+
+    /*
+     * TODO: Complete conversion coefficient matrix
+     */
+
+    private static final double[][]
+        COEFFICIENT_CONVERSION_MATRIX = new double[][]
+    {
+        /* Length Conversions */
+        // 0 Inches
+        {
+            // Inches to Inches
+            1,
+            // Inches to Feet
+            FEET_PER_INCH,
+        }
+        // 1 Feet
+        // 2 Centimeters
+        // 3 Meters
+        
+        /* Width Conversions */
+        // 4 Pounds
+        // 5 Grams
+        // 6 Kilograms
     }
 
     public static Measurement
-    convert(final Measurement from, final UnitType to)
+    convert(
+        final Measurement from, 
+        final UnitType to)
     throws IllegalArgumentException;
     {
         /* 
-         * If they are not the same measurement type,
-         * return an error. 
+         * If they are not the same measurement 
+         * type, return an error. 
          */
 
         final MeasurementType measurement_to =
@@ -103,32 +150,9 @@ public class Measurement
         if (from.measurement_type == measurement_to)
             return from;
 
-        double output_magnitude = 0.0f;
+        final double output_magnitude = from.magnitude * 
+            COEFFICIENT_CONVERSION_MATRIX[from.unit_type.index()][to.index()];
 
-        switch (from) {
-            /* Length Conversion */
-            case UnitType.INCHES:
-            {
-                switch (to)
-                {
-                    /* Inches to Feet */
-                    case UnitType.FEET:
-                        output_magnitude = from.magnitude / INCHES_PER_FOOT;
-                        break;
-
-                    /* Inches to Centimeters */
-                    case UnitType.CENTIMETERS:
-                        output_magnitude = from.magnitude * CENTIMETERS_PER_INCH;
-                        break;
-
-                    /*
-                     * TODO: Complete this section of conversions
-                     */
-
-                }
-            }
-
-            /* Weight Conversion */
-        }
+        return new Measurement(output_magnitude, to, measurement_to);
     }
 }
