@@ -280,13 +280,13 @@ public class Measurement
             //Kilograms to Kilograms
             1,
         }
-    }
+    };
 
     public static Measurement
     convert(
         final Measurement from, 
         final UnitType to)
-    throws IllegalArgumentException;
+    throws IllegalArgumentException
     {
         /* 
          * If they are not the same measurement 
@@ -307,7 +307,7 @@ public class Measurement
             return from;
 
         final double output_magnitude = from.magnitude * 
-            COEFFICIENT_CONVERSION_MATRIX[from.unit_type.index()][to.index()];
+            COEFFICIENT_CONVERSION_MATRIX[from.unit_type.index][to.index];
 
         return new Measurement(output_magnitude, to, measurement_to);
     }

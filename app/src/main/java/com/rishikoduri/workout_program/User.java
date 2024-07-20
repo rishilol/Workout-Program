@@ -23,6 +23,6 @@ public final class User
             final String height,
             final String weight)
     {
-        
+        return null;
     }
 }
