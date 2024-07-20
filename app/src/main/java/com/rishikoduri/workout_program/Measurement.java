@@ -2,11 +2,20 @@ package com.rishikoduri.workout_program;
 
 public class Measurement 
 {
-    private double magnitude;
-    private final UnitType unit_type;
+    protected double magnitude; /* Add method to set/get magnitude */
+    protected final UnitType unit_type;
     private final MeasurementType measurement_type;
 
     /* Recommended Default Constructor */
+    public Measurement(
+        double magnitude,
+        final UnitType unit_type)
+    {
+        this.magnitude = magnitude;
+        this.unit_type = unit_type;
+        this.measurement_type = get_measurement_type_from_unit_type(unit_type);
+    }
+
     public Measurement(
         double magnitude,
         final UnitType unit_type,
@@ -104,10 +113,6 @@ public class Measurement
     private static final float KILOGRAMS_PER_POUND = 
         1.0f / POUNDS_PER_KILOGRAM;
 
-    /*
-     * TODO: Complete conversion coefficient matrix
-     */
-
     private static final double[][]
         COEFFICIENT_CONVERSION_MATRIX = new double[][]
     {
@@ -200,6 +205,9 @@ public class Measurement
             //Meters to Centimeters
             CENTIMETERS_PER_METER,
 
+            // Meters to Meters
+            1,
+
             //Meters to Pounds
             -1,
 
@@ -282,6 +290,13 @@ public class Measurement
         }
     };
 
+    public static double
+    get_conversion_coefficient(final UnitType from, final UnitType to)
+    {
+        System.out.printf("from %d to %d\n", from.index, to.index);
+        return COEFFICIENT_CONVERSION_MATRIX[from.index][to.index];
+    }
+
     public static Measurement
     convert(
         final Measurement from, 
@@ -307,7 +322,7 @@ public class Measurement
             return from;
 
         final double output_magnitude = from.magnitude * 
-            COEFFICIENT_CONVERSION_MATRIX[from.unit_type.index][to.index];
+            get_conversion_coefficient(from.unit_type, to);
 
         return new Measurement(output_magnitude, to, measurement_to);
     }
