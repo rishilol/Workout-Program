@@ -2,9 +2,9 @@ package com.rishikoduri.workout_program;
 
 public class Measurement 
 {
-    protected double magnitude;
-    protected final UnitType unit_type;
-    protected final MeasurementType measurement_type;
+    private double magnitude;
+    private final UnitType unit_type;
+    private final MeasurementType measurement_type;
 
     /* Recommended Default Constructor */
     public Measurement(
@@ -87,6 +87,9 @@ public class Measurement
     private static final float FEET_PER_METER = 
         FEET_PER_CENTIMETER * CENTIMETERS_PER_METER;
 
+    private static final float INCHES_PER_METER = 39.37f;
+    private static final float METER_PER_INCHES = 1.0f / INCHES_PER_METER;
+
     /* Weight */
     private static final float GRAMS_PER_POUND = 453.5924f;
     private static final float POUNDS_PER_GRAM = 
@@ -113,17 +116,170 @@ public class Measurement
         {
             // Inches to Inches
             1,
+            
             // Inches to Feet
             FEET_PER_INCH,
-        }
+
+            // Inches to Centimeters
+            CENTIMETERS_PER_INCH,
+
+            // Inches to Meters
+            INCHES_PER_METER,
+
+            /* Illegal Weight Conversions */
+
+            // Inches to Pounds
+            -1,
+
+            // Inches to Grams
+            -1,
+
+            // Inches to Kilograms
+            -1
+        },
+
         // 1 Feet
+        {
+            // Feet to Inches
+            INCHES_PER_FOOT,
+
+            // Feet to Feet
+            1,
+
+            // Feet to Centimeters
+            CENTIMETERS_PER_FOOT,
+
+            // Feet to Meters
+            FEET_PER_METER,
+        
+            /* Illegal Weight Conversions */
+
+            // Feet to Pounds
+            -1,
+
+            // Feet to Grams
+            -1,
+
+            // Feet to Kilograms
+            -1
+        },
+
         // 2 Centimeters
+        {
+            //Centimeters to Inches
+            INCHES_PER_CENTIMETER,
+
+            //Centimeters to Feet
+            FEET_PER_CENTIMETER,
+
+            //Centimeters to Centimeters
+            1,
+
+            //Centimeters to Meter
+            METERS_PER_CENTIMETER,
+
+            /* Illegal Weight Conversions */
+
+            //Centimeters Pounds
+            -1,
+
+            //Centimeters to grams
+            -1,
+
+            //Centimeters to Kilograms
+            -1,
+        },
         // 3 Meters
+        {
+            //Meters to Inches
+            INCHES_PER_METER,
+            
+            //Meters to Feet
+            FEET_PER_METER,
+
+            //Meters to Centimeters
+            CENTIMETERS_PER_METER,
+
+            //Meters to Pounds
+            -1,
+
+            //Meters to Grams
+            -1,
+
+            //Meters to Kilograms
+            -1.
+        },
         
         /* Width Conversions */
         // 4 Pounds
+        {
+            //Pounds to Inches
+            -1,
+            
+            //Pounds to Feet,
+            -1,
+
+            //Pounds to Centimeters
+            -1,
+
+            //Pounds to Meter
+            -1,
+
+            //Pounds to Pounds
+            1,
+
+            //Pounds to Grams
+            GRAMS_PER_POUND,
+
+            //Pounds to Kilograms
+            KILOGRAMS_PER_POUND,
+        },
         // 5 Grams
+        {
+            //Grams to Inches
+            -1,
+
+            //Grams to Feet
+            -1,
+
+            //Grams to Centimeters
+            -1,
+
+            //Grams to Meter
+            -1,
+
+            //Grams to Pounds
+            POUNDS_PER_GRAM,
+
+            //Grams to Grams
+            1,
+
+            //Grams to Kilograms
+            KILOGRAMS_PER_GRAM,            
+        },
         // 6 Kilograms
+        {
+            //Kilograms to Inches
+            -1,
+
+            //Kilograms to FEET
+            -1,
+
+            //Kilograms to Centimeters
+            -1,
+
+            //Kilograms to Meter
+            -1,
+
+            //Kilograms to Pounds
+            POUNDS_PER_KILOGRAM,
+
+            //Kilograms to Grams
+            GRAMS_PER_KILOGRAM,
+
+            //Kilograms to Kilograms
+            1,
+        }
     }
 
     public static Measurement
