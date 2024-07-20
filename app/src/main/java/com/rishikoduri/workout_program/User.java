@@ -7,12 +7,10 @@ public final class User
      * whereas all data for weight is stored internally as
      * pounds by default.
      */
-    protected final Measurement height, weight;
+    private Measurement height, weight;
 
     /* Default Constructor */
-    private User (
-        final Measurement height,
-        final Measurement weight)
+    private User(Measurement height, Measurement weight)
     {
         this.height = height;
         this.weight = weight;
@@ -25,4 +23,11 @@ public final class User
     {
         return null;
     }
+
+    /* Getters and Setters */
+    public Measurement get_height() { return height; }
+    public void set_height(Measurement height) { this.height = height; }
+
+    public Measurement get_weight() { return weight; }
+    public void set_weight(Measurement weight) { this.weight = weight; }
 }

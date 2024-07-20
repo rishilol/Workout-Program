@@ -1,76 +1,7 @@
-package com.rishikoduri.workout_program;
+package com.rishikoduri.workout_program.Measurements;
 
-public class Measurement 
+public final class Conversions
 {
-    protected double magnitude; /* Add method to set/get magnitude */
-    protected final UnitType unit_type;
-    private final MeasurementType measurement_type;
-
-    /* Recommended Default Constructor */
-    public Measurement(
-        double magnitude,
-        final UnitType unit_type)
-    {
-        this.magnitude = magnitude;
-        this.unit_type = unit_type;
-        this.measurement_type = get_measurement_type_from_unit_type(unit_type);
-    }
-
-    public Measurement(
-        double magnitude,
-        final UnitType unit_type,
-        final MeasurementType measurement_type)
-    {
-        this.magnitude = magnitude;
-        this.unit_type = unit_type;
-        this.measurement_type = measurement_type;
-    }
-
-    public static enum MeasurementType {
-        LENGTH,
-        WEIGHT
-    }
-
-    public static enum UnitType {
-        /* Length */
-        INCHES(0),
-        FEET(1),
-        CENTIMETERS(2),
-        METERS(3),
-
-        /* Weight */
-        POUNDS(4),
-        GRAMS(5),
-        KILOGRAMS(6);
-
-        public final int index;
-
-        private UnitType(int index) 
-        {
-            this.index = index;
-        }
-    }
-
-    public static MeasurementType
-    get_measurement_type_from_unit_type(
-            final UnitType type)
-    {
-        switch (type) {
-            case UnitType.INCHES:
-            case UnitType.FEET:
-            case UnitType.CENTIMETERS:
-            case UnitType.METERS:
-                return MeasurementType.LENGTH;
-
-            case UnitType.POUNDS:
-            case UnitType.GRAMS:
-            case UnitType.KILOGRAMS:
-                return MeasurementType.WEIGHT;
-        }
-
-        return null;
-    }
-
     /* Conversion Factors */
 
     /* Length */
