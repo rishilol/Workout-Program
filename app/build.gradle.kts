@@ -21,6 +21,18 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    testImplementation("ch.qos.logback:logback-classic:1.5.6")
+
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+    implementation("org.eclipse.jetty:jetty-server:12.0.11")
+
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet
+    implementation("org.eclipse.jetty:jetty-servlet:11.0.22")
+
+    // https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
+    implementation("io.github.cdimascio:java-dotenv:5.2.2")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
