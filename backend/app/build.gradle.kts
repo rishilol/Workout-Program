@@ -33,6 +33,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
     implementation("io.github.cdimascio:java-dotenv:5.2.2")
+
+    implementation("javax.measure:unit-api:2.1.3")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

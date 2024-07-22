@@ -4,13 +4,13 @@ public class Exercise {
     private final String name;
     /* Standard units for weight is in pounds */
     private int sets, reps;
-    private Measurement weight;
+    private Quantity<Mass> weight;
 
     public Exercise(
         final String name, 
-        int sets, 
-        int reps,
-        Measurement weight) 
+        final int sets, 
+        final int reps,
+        final Quantity<Mass> weight) 
     {
         this.name = name;
         this.sets = sets;

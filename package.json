@@ -1,10 +1,11 @@
 {
-  "name": "webview",
+  "name": "Workout-Program",
   "version": "1.0.0",
-  "description": "html/css view via electron",
-  "main": "main.ts",
+  "description": "Exercise aid mini-program developed for both browser and desktop",
+  "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd backend && ./gradlew build",
     "start": "ts-node main.ts"
   },
   "repository": {

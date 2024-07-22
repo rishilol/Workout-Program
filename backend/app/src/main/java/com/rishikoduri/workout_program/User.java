@@ -1,5 +1,7 @@
 package com.rishikoduri.workout_program;
 
+import javax.measure.Quantity;
+
 public final class User 
 {
     /*
@@ -7,19 +9,18 @@ public final class User
      * whereas all data for weight is stored internally as
      * pounds by default.
      */
-    private Measurement height, weight;
+    private Quantity<Mass> weight;
+    private Quantity<Length> height;
 
     /* Default Constructor */
-    private User(Measurement height, Measurement weight)
+    private User(final Quantity<Mass> weight, final Quantity<Length> height)
     {
         this.height = height;
         this.weight = weight;
     }
 
     public static User 
-    parse_from_strings(
-            final String height,
-            final String weight)
+    parse_from_strings(final String height, final String weight)
     {
         return null;
     }
